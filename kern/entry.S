@@ -1,7 +1,7 @@
 .global _start
 _start:
 	ldr sp, bootstack
-	bl main
+	bl kern_init
 spin:
 	b spin
 bootstack:
