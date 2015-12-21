@@ -4,7 +4,7 @@
 #include <inc/assert.h>
 #include <kern/pmap.h>
 
-// Memmory mapping when booting.
+// Memory mapping when booting.
 // map [0, 16MiB) to [KERNBASE, KERNBASE + 16MiB)
 pde_t kern_pgdir[4096] __attribute__((aligned(16 * 1024))) = {
 	[0x0] = 0x00000002,

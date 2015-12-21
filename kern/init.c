@@ -11,7 +11,6 @@ void kern_init()
 {
 	mem_init();
 	console_init();
-	cprintf("Hello\n");
 	monitor(NULL);
 }
 
@@ -46,7 +45,7 @@ _panic(const char *file, int line, const char *fmt,...)
 dead:
 	/* break into the kernel monitor */
 	while (1)
-		continue;
+		monitor(NULL);
 }
 
 void raise() {for(;;);}
