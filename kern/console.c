@@ -1,5 +1,6 @@
 #include <inc/types.h>
 #include <kern/pmap.h>
+#include <inc/config.h>
 
 struct uart {
 	uint32_t dr;
@@ -11,7 +12,11 @@ static struct uart *uart0;
 
 void console_init()
 {
+#ifdef VERSATILE_PB
 	uart0 = (struct uart *)mmio_map_region(0x101F1000, 4 * 1024);
+#else
+	uart0 = (struct uart *)mmio_map_region(0x20201000, 4 * 1024);
+#endif
 }
 
 int iscons(int fdnum)

@@ -5,8 +5,8 @@ import os
 import subprocess
 
 qemu = 'qemu-system-arm'
-qemu_options = ['-machine', 'versatilepb', '-cpu', 'arm1176', '-m', '256']
-qemu_options += ['-serial', 'stdio', '-no-reboot', '-gdb', 'tcp::1234']
+qemu_options = ['-machine', 'versatilepb', '-cpu', 'cortex-a8', '-m', '256']
+qemu_options += ['-serial', 'mon:stdio', '-no-reboot', '-gdb', 'tcp::1234']
 qemu_options += ['-kernel', 'build/kern/kernel']
 
 def help_message():

@@ -1,2 +1,2 @@
 #pragma once
-#cmakedefine TARGET_MACHINE
+#cmakedefine VERSATILE_PB

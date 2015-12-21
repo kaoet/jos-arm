@@ -11,11 +11,11 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Wall -Werror -g -DJOS_KERNEL")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib -nostdinc -ffreestanding")
 
 # for target platform
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=armv6zk -mcpu=arm1176jzf-s -marm -mfpu=vfp -mfloat-abi=hard")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=armv7-a -mfpu=vfp -mfloat-abi=soft")
 
 set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS)
 
-set(TARGET_MACHINE, "VERSATILE_PB")
+option(VERSATILE_PB "Build for Versatile PB" ON)
 configure_file (
   "${PROJECT_SOURCE_DIR}/inc/config.h.in"
   "${PROJECT_BINARY_DIR}/inc/config.h"
