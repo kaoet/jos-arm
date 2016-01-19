@@ -5,7 +5,7 @@ set(CMAKE_ASM_COMPILER "arm-none-eabi-gcc")
 set(CMAKE_C_COMPILER "arm-none-eabi-gcc")
 
 # for language features
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Wall -Werror -g -DJOS_KERNEL")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Wall -Werror -Wno-unused-function -g -DJOS_KERNEL")
 
 # for platform independency
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib -nostdinc -ffreestanding")

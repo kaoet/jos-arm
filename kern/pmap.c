@@ -78,6 +78,18 @@ void region_init()
 	}
 }
 
+static void set_domain(int did, int priv) {
+    int clear_bit = ~(11 << (2 * did));
+    int new_priv = priv << (2 * did);
+    asm("mrc p15, 0, r0, c3, c0, 0\n"
+        "and r0, r0, %0\n"
+        "orr r0, r0, %1\n"
+        "mcr p15, 0, r0, c3, c0, 0\n" 
+        : 
+        : "r"(clear_bit), "r"(new_priv)
+        : "r0");
+}
+
 // allocate a mem_region
 struct mem_region *region_alloc(int alloc_flags)
 {
@@ -113,9 +125,12 @@ void mem_init()
 
 	// map physical memory
 	for (uintptr_t addr = KERNBASE; addr != 0; addr += PTSIZE) {
-		kern_pgdir[PDX(addr)] = PADDR(addr) | 2;
+		kern_pgdir[PDX(addr)] = PADDR(addr) | PDE_ENTRY_1M | PDE_NONE_U;
 		kern_pgdir[PDX(PADDR(addr))] = 0;
 	}
+	
+	set_domain(0, DOMAIN_CLIENT);
+	
 }
 
 pte_t * pgdir_walk(pde_t *pgdir, uintptr_t va, bool create)
@@ -130,7 +145,7 @@ pte_t * pgdir_walk(pde_t *pgdir, uintptr_t va, bool create)
 	        return NULL;
 	    }
 	    new->refn++;
-	    *pde = region2pa(new) | 1;
+	    *pde = region2pa(new) | PDE_ENTRY;
 	}
 	
 	pte_t *pgtbl = (pte_t *)KADDR(PDE_ADDR(*pde));
@@ -146,7 +161,7 @@ static void boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t 
         if (pte == NULL) {
             panic("boot_map_region out of memory\n");
         }
-        *pte = (pa + off) | 2;
+        *pte = (pa + off) | PTE_ENTRY_SMALL | PTE_NONE_U;
     }
 }
 

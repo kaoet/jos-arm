@@ -50,3 +50,26 @@
 
 #define PDE_ADDR(pde)	((physaddr_t) (pde) & ~0x3FF)
 #define PTE_ADDR(pte)   ((physaddr_t) (pte) & ~0xFFF)
+
+#define PDE_RDONLY (1<<9)
+#define PDE_APX (1<<15)
+#define PDE_NONE_ALL 0
+#define PDE_NONE_U (1 << 10)
+#define PDE_R_U (2 << 10)
+#define PDE_RW_U (3 << 10)
+#define PDE_ENTRY_1M (0x2)
+#define PDE_ENTRY (0x1)
+
+#define PTE_APX (1 << 9)
+#define PTE_NONE_ALL 0
+#define PTE_NONE_U (1 << 4)
+#define PTE_R_U (2 << 4)
+#define PTE_RW_U (3 << 4)
+#define PTE_ENTRY_SMALL (0x2)
+#define PTE_ENTRY_LARGE (0x1)
+
+
+#define DOMAIN_NONE 0x0
+#define DOMAIN_CLIENT 0x1
+#define DOMAIN_MANAGER 0x3
+
