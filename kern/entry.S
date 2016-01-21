@@ -18,7 +18,7 @@ _start:
 	bx lr
 
 high_addr:
-	ldr sp, =(bootstack + KSTKSIZE)
+	ldr sp, =KSTACKTOP
 	bl kern_init
 spin:
 	b spin

@@ -5,7 +5,7 @@
 #include <kern/monitor.h>
 #include <kern/console.h>
 
-uint8_t bootstack[KSTKSIZE] __attribute__((aligned(PGSIZE)));
+uint8_t bootstack[KSTKSIZE + KSTKGAP] __attribute__((aligned(PTSIZE)));
 
 void kern_init()
 {

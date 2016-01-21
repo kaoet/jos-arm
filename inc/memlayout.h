@@ -17,14 +17,16 @@
 
 // Kernel stack.
 #define KSTACKTOP	KERNBASE
-#define KSTKSIZE	(8*PGSIZE)   		// size of a kernel stack
-#define KSTKGAP		(8*PGSIZE)   		// size of a kernel stack guard
+#define KSTKSIZE	(128 * PGSIZE)   		// size of a kernel stack
+#define KSTKGAP		(128 * PGSIZE)   		// size of a kernel stack guard
 
 // Memory-mapped IO.
 #define MMIOLIM		(KSTACKTOP - PTSIZE)
 #define MMIOBASE	(MMIOLIM - PTSIZE)
+#define MCONSOLE    (MMIOBASE - PTSIZE)
 
-#define ULIM		(MMIOBASE)
+#define ULIM		(MCONSOLE)
+
 
 /*
  * User read-only mappings! Anything below here til UTOP are readonly to user.

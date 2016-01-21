@@ -8,7 +8,14 @@ struct uart {
 	uint32_t fr;
 };
 
-static struct uart *uart0;
+static struct uart *uart0 = (struct uart*)
+(MCONSOLE +
+#ifdef VERSATILE_PB
+	0xF1000
+#else
+	0x01000
+#endif
+);
 
 void console_init()
 {
